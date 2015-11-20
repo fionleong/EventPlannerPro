@@ -27,7 +27,7 @@ import org.omg.CORBA.portable.InputStream;
 public class DailyView
 {
 	static ArrayList<EventData> events;
-	static Model m = new Model();
+//	static Model m = new Model();
 	static Object o = new Object();
 
 	public DailyView(ArrayList<EventData> e)
@@ -37,7 +37,8 @@ public class DailyView
 
 	static EventView ae = new EventView();
 
-	public static void createAndShowDailyViewGUI()
+	//Removed static field Model m and made it a parameter so it pulls the most recent model
+	public static void createAndShowDailyViewGUI(final Model m)
 	{
 
 		final Color babyTeal = new Color(142, 229, 238);
@@ -56,11 +57,9 @@ public class DailyView
 
 		} catch (FontFormatException e1)
 		{
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (IOException e1)
 		{
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -136,8 +135,14 @@ public class DailyView
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				// TODO Auto-generated method stub
-				EventView.createAndShowGUI(m);
+				//If an event exists on this day, pulls the index of event for EventView (Derick)
+				int n = -1;
+				for(EventData d: m.eventData)
+				{
+					if(d.date[0] == MONTHS.valueOf(m.getCurrentMonth()+"").ordinal()+1 && d.date[1] == m.getCurrentDay() && d.date[2] == m.getCurrentYear())
+						n = m.eventData.indexOf(d);
+				}
+				EventView.createAndShowGUI(m,n);
 			}
 		});
 
@@ -370,7 +375,6 @@ public class DailyView
 		// FRAME
 		JFrame dailyView = new JFrame("Event Planner Pro");
 		dailyView.setLayout(new BorderLayout());
-		dailyView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		dailyView.setBackground(Color.WHITE);
 
 		dailyView.add(upperDVPannel, BorderLayout.NORTH);

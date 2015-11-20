@@ -235,7 +235,7 @@ public class MonthlyView extends JPanel implements ChangeListener
 				{
 					daynumber = counter;
 					model.changeDay(daynumber);
-					DailyView.createAndShowDailyViewGUI(model);
+					DailyView.createAndShowDailyViewGUI();
 				}
 			});
 		}

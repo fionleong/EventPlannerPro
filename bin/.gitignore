@@ -1,3 +1,34 @@
+<<<<<<< HEAD
+/Raleway-Bold.ttf
+/Raleway-BoldItalic.ttf
+/Raleway-ExtraBold.ttf
+/Raleway-ExtraBoldItalic.ttf
+/Raleway-ExtraLight.ttf
+/Raleway-ExtraLightItalic.ttf
+/Raleway-Italic.ttf
+/Raleway-Light.ttf
+/Raleway-LightItalic.ttf
+/Raleway-Medium.ttf
+/Raleway-MediumItalic.ttf
+/Raleway-Regular.ttf
+/Raleway-SemiBold.ttf
+/Raleway-SemiBoldItalic.ttf
+/Raleway-Thin.ttf
+/Raleway-ThinItalic.ttf
+/events.epp
+/minus1.png
+/next1.png
+/plus1.png
+/pre1.png
+/Alarm.class
+/AlarmView$1.class
+/AlarmView$2.class
+/AlarmView$3.class
+/AlarmView$4.class
+/AlarmView.class
+/CalendarFrame.class
+=======
+>>>>>>> 342403544044fb552f2e1956737273f48ae07ec7
 /CalendarView.class
 /ControllerPanel$1.class
 /ControllerPanel$2.class
@@ -27,6 +58,8 @@
 /MonthlyView.class
 /Raleway-Black.ttf
 /Raleway-BlackItalic.ttf
+<<<<<<< HEAD
+=======
 /Raleway-Bold.ttf
 /Raleway-BoldItalic.ttf
 /Raleway-ExtraBold.ttf
@@ -43,12 +76,16 @@
 /Raleway-SemiBoldItalic.ttf
 /Raleway-Thin.ttf
 /Raleway-ThinItalic.ttf
+>>>>>>> 342403544044fb552f2e1956737273f48ae07ec7
 /Time.class
 /TimeDate.class
 /User.class
 /YearlyView.class
+<<<<<<< HEAD
+=======
 /events.epp
 /minus1.png
 /next1.png
 /plus1.png
 /pre1.png
+>>>>>>> 342403544044fb552f2e1956737273f48ae07ec7

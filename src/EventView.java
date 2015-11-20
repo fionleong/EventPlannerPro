@@ -37,8 +37,11 @@ public class EventView
 			"56", "57", "58", "59" };
 	final static String[] MERIDIEM = new String[]
 	{ "AM", "PM" };
-
-	public static void createAndShowGUI(final Model m)
+	
+	static AlarmView aView;
+	
+	// If an event already exists, n is the index of the event from model. If event does not exist, n = -1. (Derick)
+	public static void createAndShowGUI(final Model m, int n)
 	{
 		final Color babyTeal = new Color(142, 229, 238);
 		Font railWayBig = new Font("Raleway-Regular", Font.PLAIN, 26);
@@ -52,16 +55,18 @@ public class EventView
 			railWay = font.deriveFont(Font.PLAIN, 12);
 			railWayBig = font.deriveFont(Font.PLAIN, 26);
 
-		} catch (FontFormatException e1)
+		}
+		catch (FontFormatException e1)
 		{
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1)
-		{
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
+		catch (IOException e1)
+		{
+			e1.printStackTrace();
+		}
+		
+		aView = new AlarmView(m);
+		
 		// UPPER GUI
 		JPanel upperPannel = new JPanel();
 		upperPannel.setLayout(new GridLayout(2, 2));
@@ -181,6 +186,11 @@ public class EventView
 
 		final JTextField eventNameField = new JTextField(33);
 		eventNamePanel.add(eventNameField);
+		
+		//If an event already exists, place its name in the text field (Derick)
+		if(n != -1)
+    		eventNameField.setText(m.eventData.get(n).name);
+    	eventNamePanel.add(eventNameField);
 
 		JPanel eventDateTimePanel = new JPanel();
 		eventDateTimePanel.setBackground(Color.WHITE);
@@ -202,7 +212,19 @@ public class EventView
 		eventTimeComboBoxes.add(eventTimeHour);
 		eventTimeComboBoxes.add(eventTimeMinute);
 		eventTimeComboBoxes.add(eventTimeMeridiem);
-
+		
+		//If an event already exists, place its time in the combo boxes (Derick)
+		if(n != -1)
+    	{
+    		String min = m.eventData.get(n).time.min+"";
+    		if(m.eventData.get(n).time.min < 10)
+    			min = "0"+min;
+    		
+    		eventTimeHour.setSelectedIndex(java.util.Arrays.asList(HOURS).indexOf(m.eventData.get(n).time.hour));
+    		eventTimeMinute.setSelectedIndex(java.util.Arrays.asList(MINUTES).indexOf(min));
+    		eventTimeMeridiem.setSelectedIndex(java.util.Arrays.asList(MERIDIEM).indexOf(m.eventData.get(n).time.meridiem));
+    	}
+		
 		eventDateTimePanel.add(eventTimeComboBoxes);
 
 		JLabel eventDateLabel = new JLabel("Date: ");
@@ -210,6 +232,14 @@ public class EventView
 		eventDateTimePanel.add(eventDateLabel);
 
 		final JTextField eventDateField = new JTextField(19);
+		
+    	String date[] = new String[]{(MONTHS.valueOf(m.getCurrentMonth()+"").ordinal()+1)+"",m.getCurrentDay()+""};
+    	if(Integer.parseInt(date[0]) < 10)
+    		date[0] = "0"+date[0];
+    	if(Integer.parseInt(date[1]) < 10)
+    		date[1] = "0"+date[1];
+    	eventDateField.setText(date[0]+"/"+date[1]+"/"+m.getCurrentYear());
+		
 		eventDateTimePanel.add(eventDateField);
 
 		JPanel eventAlarmLocationPanel = new JPanel();
@@ -265,6 +295,10 @@ public class EventView
 		eventAlarmLocationPanel.add(eventLocationLabel);
 
 		final JTextField eventLocationField = new JTextField(25);
+		
+		//If an event already exists, place its location in the text field (Derick)
+		if(n != -1)
+    		eventLocationField.setText(m.eventData.get(n).location);
 		eventAlarmLocationPanel.add(eventLocationField);
 
 		JPanel eventDescriptionPanel = new JPanel();
@@ -277,6 +311,10 @@ public class EventView
 		eventDescriptionPanel.add(eventDescriptionLabel);
 
 		final JTextField eventDescriptionField = new JTextField(33);
+		
+		//If an event already exists, place its description in the text field (Derick)
+		if(n != -1)
+    		eventDescriptionField.setText(m.eventData.get(n).description);
 		eventDescriptionPanel.add(eventDescriptionField);
 
 		JPanel eventCancelPanel = new JPanel();
